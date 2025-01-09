@@ -1,0 +1,106 @@
+.category-nav .nav-link {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+}
+
+.product-card .card-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+.product-card .card-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.product-card {
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  border: 1px solid black;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.quick-shop-overlay {
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-card:hover .quick-shop-overlay {
+  opacity: 1;
+}
+
+.quick-shop-btn {
+  position: relative;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.quick-shop-btn:hover {
+  transform: scale(1.05);
+  background-color: #5ece7b !important;
+}
+
+.product-card.out-of-stock .card-img-top {
+  filter: brightness(0.7);
+}
+
+.out-of-stock-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #8d8f9a;
+  font-family: "Helvetica", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+  z-index: 1;
+  box-shadow: 0 0px 5px rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  border-radius: 4px;
+  border: "10px solid black";
+}
+
+.product-card.out-of-stock .quick-shop-btn {
+  background: #a6a6a6;
+  pointer-events: none;
+}
+
+.category-nav .nav-link.active {
+  color: #5ece7b !important;
+  position: relative;
+}
+
+.category-nav .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #5ece7b;
+}
+
+.category-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}

@@ -11,7 +11,7 @@ import axios from "axios";
  */
 class GraphQLService {
   /** @constant {string} API_URL - GraphQL endpoint URL */
-  static API_URL = "http://localhost:8080/graphql";
+  static API_URL = import.meta.env.VITE_GRAPHQL_API;
 
   /**
    * Makes GraphQL request to the API

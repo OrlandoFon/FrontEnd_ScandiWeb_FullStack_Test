@@ -124,6 +124,7 @@ class Header extends Component {
                 ref={this.cartButtonRef}
                 className="btn btn-light position-relative"
                 onClick={toggleOverlay}
+                data-testid="cart-btn"
               >
                 <img
                   src={CartIcon}

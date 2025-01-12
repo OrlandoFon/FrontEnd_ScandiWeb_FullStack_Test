@@ -36,25 +36,34 @@ class CategoryButton extends Component {
   render() {
     const { categoryName, isActive, onClick, isLoading } = this.props;
     const letters = categoryName.split("");
+    const hrefPath = `/${categoryName.toLowerCase()}`;
 
     return (
-      <motion.button
-        className="nav-link category-button"
-        onClick={onClick}
+      <motion.a
+        href={hrefPath}
         data-testid={isActive ? "active-category-link" : "category-link"}
+        onClick={(e) => {
+          e.preventDefault(); // Prevent full page reload
+          if (!isLoading && onClick) {
+            onClick();
+          }
+        }}
+        className="nav-link category-button"
         style={{
           position: "relative",
           background: "none",
           border: "none",
-          padding: "0",
+          padding: 0,
           margin: "0 10px",
           cursor: isLoading ? "not-allowed" : "pointer",
           opacity: isLoading ? 0.5 : 1,
           color: isActive ? "#5ECE7B" : "#000000",
           fontWeight: isActive ? "bold" : "normal",
           fontSize: "16px",
+          textDecoration: "none", // ensure no default underline
+          display: "inline-flex",
+          alignItems: "center",
         }}
-        disabled={isLoading}
       >
         <span style={{ display: "inline-flex", overflow: "hidden" }}>
           {letters.map((letter, index) => (
@@ -73,7 +82,6 @@ class CategoryButton extends Component {
             </motion.span>
           ))}
         </span>
-
         {isActive && (
           <motion.div
             variants={this.underlineVariants}
@@ -90,7 +98,7 @@ class CategoryButton extends Component {
             }}
           />
         )}
-      </motion.button>
+      </motion.a>
     );
   }
 }

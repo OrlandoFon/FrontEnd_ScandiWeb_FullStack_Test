@@ -1,5 +1,9 @@
 # ScandiWeb Junior Full Stack Test - Front End
 
+<div align="center">
+  <img src="public/Front_End.gif" alt="Demo GIF" width="500">
+</div>
+
 ## Overview
 
 This project is a front-end application built as part of the ScandiWeb Junior Full Stack Dev test. It is developed using React and Vite, designed to interact seamlessly with a GraphQL-based back-end.

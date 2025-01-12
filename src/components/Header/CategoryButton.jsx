@@ -39,12 +39,13 @@ class CategoryButton extends Component {
     const hrefPath = `/${categoryName.toLowerCase()}`;
 
     return (
-      <motion.button
-        data-href={hrefPath}
+      <motion.a
+        href={hrefPath}
         data-testid={isActive ? "active-category-link" : "category-link"}
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault(); // Prevent full page reload to use React Router
           if (!isLoading && onClick) {
-            onClick(categoryName);
+            onClick(categoryName); // Pass categoryName to the parent click handler
           }
         }}
         className="nav-link category-button"
@@ -63,7 +64,6 @@ class CategoryButton extends Component {
           display: "inline-flex",
           alignItems: "center",
         }}
-        disabled={isLoading}
       >
         <span style={{ display: "inline-flex", overflow: "hidden" }}>
           {letters.map((letter, index) => (
@@ -95,7 +95,7 @@ class CategoryButton extends Component {
             }}
           />
         )}
-      </motion.button>
+      </motion.a>
     );
   }
 }

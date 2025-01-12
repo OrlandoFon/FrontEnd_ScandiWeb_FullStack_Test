@@ -67,19 +67,12 @@ class Header extends Component {
   handleCategoryClick = (categoryName) => {
     const { setActiveCategory, navigate } = this.props;
     setActiveCategory(categoryName);
-    navigate("/", { state: { category: categoryName } });
+    // Navigate to /{categoryName}, placing it in location state
+    navigate(`/${categoryName.toLowerCase()}`, {
+      state: { category: categoryName },
+    });
   };
 
-  /**
-   * Component PropTypes
-   * @property {Array} categories - Available product categories
-   * @property {string} activeCategory - Currently selected category
-   * @property {Function} setActiveCategory - Handler for category selection
-   * @property {Function} toggleOverlay - Handler for cart overlay
-   * @property {boolean} isOverlayVisible - Controls cart overlay visibility
-   * @property {boolean} isLoading - Loading state indicator
-   * @property {Function} navigate - Router navigation function
-   */
   render() {
     const {
       categories = [],
@@ -89,6 +82,12 @@ class Header extends Component {
       isLoading = false,
     } = this.props;
     const { itemsCount } = this.state;
+
+    // Ensure "all" is included if not already
+    const normalized = categories.map((cat) => cat.name.toLowerCase());
+    const finalCategories = normalized.includes("all")
+      ? categories
+      : [{ name: "all" }, ...categories];
 
     return (
       <header
@@ -104,14 +103,15 @@ class Header extends Component {
       >
         <div className="container">
           <div className="row align-items-center">
+            {/* Navigation links */}
             <div className="col">
               <ul className="nav category-nav d-flex">
-                {categories?.map((category, index) => (
+                {finalCategories.map((category, index) => (
                   <li className="nav-item" key={index}>
                     <CategoryButton
                       categoryName={category.name}
                       isActive={activeCategory === category.name}
-                      onClick={() => this.handleCategoryClick(category.name)}
+                      onClick={(catName) => this.handleCategoryClick(catName)}
                       isLoading={isLoading}
                     />
                   </li>
@@ -119,6 +119,7 @@ class Header extends Component {
               </ul>
             </div>
 
+            {/* Cart button */}
             <div className="col-auto position-relative">
               <button
                 ref={this.cartButtonRef}
@@ -129,11 +130,7 @@ class Header extends Component {
                 <img
                   src={CartIcon}
                   alt="Cart"
-                  style={{
-                    width: 30,
-                    height: 30,
-                    objectFit: "contain",
-                  }}
+                  style={{ width: 30, height: 30, objectFit: "contain" }}
                 />
                 {itemsCount > 0 && (
                   <div
@@ -174,6 +171,16 @@ class Header extends Component {
   }
 }
 
+/**
+ * Component PropTypes
+ * @property {Array} categories - Available product categories
+ * @property {string} activeCategory - Currently selected category
+ * @property {Function} setActiveCategory - Handler for category selection
+ * @property {Function} toggleOverlay - Handler for cart overlay
+ * @property {boolean} isOverlayVisible - Controls cart overlay visibility
+ * @property {boolean} isLoading - Loading state indicator
+ * @property {Function} navigate - Router navigation function
+ */
 Header.propTypes = {
   categories: PropTypes.arrayOf(
     PropTypes.shape({

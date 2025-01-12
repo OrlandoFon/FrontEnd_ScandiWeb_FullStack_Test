@@ -64,8 +64,16 @@ class App extends Component {
     return (
       <div className="App">
         <Routes>
+          {/* Default route redirects to /all */}
           <Route
             path="/"
+            element={
+              <CategoryPage products={products} categories={categories} />
+            }
+          />
+          {/* Handle category routes like /all, /tech, etc */}
+          <Route
+            path="/:category"
             element={
               <CategoryPage products={products} categories={categories} />
             }

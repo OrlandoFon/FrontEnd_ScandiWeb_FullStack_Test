@@ -43,9 +43,9 @@ class CategoryButton extends Component {
         href={hrefPath}
         data-testid={isActive ? "active-category-link" : "category-link"}
         onClick={(e) => {
-          e.preventDefault(); // Prevent full page reload
+          e.preventDefault(); // Prevent full page reload to use React Router
           if (!isLoading && onClick) {
-            onClick();
+            onClick(categoryName); // Pass categoryName to the parent click handler
           }
         }}
         className="nav-link category-button"
@@ -60,7 +60,7 @@ class CategoryButton extends Component {
           color: isActive ? "#5ECE7B" : "#000000",
           fontWeight: isActive ? "bold" : "normal",
           fontSize: "16px",
-          textDecoration: "none", // ensure no default underline
+          textDecoration: "none",
           display: "inline-flex",
           alignItems: "center",
         }}
@@ -72,10 +72,7 @@ class CategoryButton extends Component {
               variants={this.letterVariants}
               initial="hidden"
               animate={isActive ? "visible" : "hidden"}
-              transition={{
-                duration: 0.3,
-                delay: index * 0.05,
-              }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
               style={{ display: "inline-block" }}
             >
               {letter}
@@ -102,6 +99,7 @@ class CategoryButton extends Component {
     );
   }
 }
+
 /**
  * Component PropTypes
  * @property {string} categoryName - Category name to display

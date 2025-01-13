@@ -48,9 +48,9 @@ class CartOverlay extends Component {
    * @property {Object} exit - Exit animation state
    */
   overlayVariants = {
-    hidden: { opacity: 0, y: -5 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -5 },
+    hidden: { opacity: 0, y: -5, pointerEvents: "none" },
+    visible: { opacity: 1, y: 0, pointerEvents: "auto" },
+    exit: { opacity: 0, y: -5, pointerEvents: "none" },
   };
 
   /**
@@ -175,7 +175,8 @@ class CartOverlay extends Component {
               animate="visible"
               exit="exit"
               variants={this.overlayVariants}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.1, ease: "easeInOut" }}
+              data-testid="cart-overlay"
               style={{
                 position: "fixed",
                 top: `${position.top}px`,

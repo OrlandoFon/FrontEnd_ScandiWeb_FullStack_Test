@@ -101,11 +101,18 @@ class ProductAttributes extends Component {
           >
             <h4 className="mb-3 text-uppercase fs-6">{attr.name}:</h4>
             <div className="d-flex gap-2">
-              {attr.items.map((item, i) =>
-                attr.name.toLowerCase() === "color"
-                  ? this.renderColorButton(attr, item, i)
-                  : this.renderSizeButton(attr, item, i)
-              )}
+              {attr.items.map((item, i) => (
+                <div
+                  key={i}
+                  data-testid={`product-attribute-${this.toKebabCase(
+                    attr.name
+                  )}-${this.toKebabCase(item.value)}`}
+                >
+                  {attr.name.toLowerCase() === "color"
+                    ? this.renderColorButton(attr, item, i)
+                    : this.renderSizeButton(attr, item, i)}
+                </div>
+              ))}
             </div>
           </div>
         ))}
